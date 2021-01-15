@@ -1,4 +1,8 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, hasMany, model, property} from '@loopback/repository';
+import {MonitoramentoCounter} from './Monitoramento-counter.model';
+import {MonitoramentoErro} from './Monitoramento-erro.model';
+import {MonitoramentoSuprimento} from './monitoramento-suprimento.model';
+import {MonitoramentoUso} from './Monitoramento-uso.model';
 
 @model()
 export class Printer extends Entity {
@@ -16,65 +20,82 @@ export class Printer extends Entity {
   patrimonio: string;
 
   @property({
-    type: 'date',
+    type: 'object',
+    default: {},
   })
-  dataInstalacao?: string;
+  localizacao?: object;
 
   @property({
-    type: 'date',
+    type: 'object',
+    default: {},
   })
-  dataAquisicao?: string;
-
-  @property({
-    type: 'boolean',
-    required: true,
-  })
-  comissionada: boolean;
+  config?: object;
 
   @property({
     type: 'boolean',
-    required: true,
-  })
-  alocada: boolean;
-
-  @property({
-    type: 'boolean',
-    default: 0,
   })
   flagErro?: boolean;
 
   @property({
-    type: 'string',
+    type: 'object',
+    default: {},
   })
-  msgErro?: string;
+  statusOnline?: object;
 
   @property({
     type: 'object',
+    default: {},
+  })
+  msgErro?: object;
+
+  @property({
+    type: 'object',
+    default: {},
   })
   statusSuprimentos?: object;
 
   @property({
     type: 'object',
+    default: {},
   })
-  config?: object;
-
-  @property({
-    type: 'object',
-  })
-  localInstalacao?: object;
+  statusContadores?: object;
 
   @property({
     type: 'string',
-    required: true,
   })
-  numeroSerial: string;
+  numeroSerie?: string;
+
+  @property({
+    type: 'boolean',
+  })
+  comissionada?: boolean;
+
+  @property({
+    type: 'boolean',
+  })
+  alocada?: boolean;
 
   @property({
     type: 'number',
-    default: 1,
   })
   parqueId?: number;
 
+  @property({
+    type: 'number',
+  })
+  printerModeloId?: number;
+
+  @hasMany(() => MonitoramentoCounter)
+  MonitoramentoCounters: MonitoramentoCounter[];
+
+  @hasMany(() => MonitoramentoErro)
+  MonitoramentoErros: MonitoramentoErro[];
+
+  @hasMany(() => MonitoramentoUso)
+  MonitoramentoUsos: MonitoramentoUso[];
+
+  @hasMany(() => MonitoramentoSuprimento)
+  MonitoramentoSuprimentos: MonitoramentoSuprimento[];
 
   constructor(data?: Partial<Printer>) {
     super(data);

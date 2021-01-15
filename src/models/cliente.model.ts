@@ -1,47 +1,54 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, hasMany, model, property} from '@loopback/repository';
+import {Parque} from './parque.model';
 
 @model()
 export class Cliente extends Entity {
   @property({
-    type: 'string',
-    required: true,
-  })
-  nome: string;
-
-  @property({
-    type: 'object',
-  })
-  endereco?: object;
-
-  @property({
     type: 'number',
     id: true,
     generated: true,
-
   })
-  id: number;
+  id?: number;
+
+  @property({
+    type: 'string',
+    default: " ",
+  })
+  nome?: string;
+
+  @property({
+    type: 'object',
+    default: {"Aviso":"prencher com informações de contato"},
+  })
+  contato?: object;
+
+  @property({
+    type: 'string',
+    default: "00001",
+  })
+  contrato?: string;
+
+  @property({
+    type: 'object',
+    default: {"Aviso":"Descreva os servições prestados."},
+  })
+  servicosPrestados?: object;
+
+  @property({
+    type: 'object',
+    default: {"Aviso":"prencher com informações de preços dos servições."},
+  })
+  valoresCobrados?: object;
 
   @property({
     type: 'string',
   })
-  contrato: string;
-
-  @property({
-    type: 'object',
-    required: true,
-  })
-  servicosPrestados: object;
-
-  @property({
-    type: 'object',
-  })
-  valores?: object;
+  descricaoCliente?: string;
 
   @property({
     type: 'string',
-    required: true,
   })
-  descricaoCliente: string;
+  tipoCliente?: string;
 
   @property({
     type: 'date',
@@ -50,22 +57,17 @@ export class Cliente extends Entity {
 
   @property({
     type: 'date',
-    required: true,
   })
-  dataEncerramento: string;
+  dataEncerramento?: string;
 
   @property({
     type: 'boolean',
-    required: true,
-  })
-  ativo: boolean;
 
-  @property({
-    type: 'string',
-    required: true,
   })
-  tipoCliente: string;
+  ativo?: boolean;
 
+  @hasMany(() => Parque)
+  parques: Parque[];
 
   constructor(data?: Partial<Cliente>) {
     super(data);

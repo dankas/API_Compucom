@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Printer} from './printer.model';
 
 @model()
 export class Parque extends Entity {
@@ -10,10 +11,10 @@ export class Parque extends Entity {
   id?: number;
 
   @property({
-    type: 'number',
+    type: 'string',
     required: true,
   })
-  clienteId: number;
+  nome: string;
 
   @property({
     type: 'object',
@@ -22,10 +23,12 @@ export class Parque extends Entity {
   endereco: object;
 
   @property({
-    type: 'object',
+    type: 'number',
   })
-  contato?: object;
+  clienteId?: number;
 
+  @hasMany(() => Printer)
+  printersnoparque: Printer[];
 
   constructor(data?: Partial<Parque>) {
     super(data);

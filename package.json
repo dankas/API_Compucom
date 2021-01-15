@@ -1,7 +1,7 @@
 {
   "name": "api_compucom",
   "version": "0.0.1",
-  "description": "Api de monitoramento do parque de impressões da compucom.",
+  "description": "Api de Monitoramento do parque de impressões da compucom.",
   "keywords": [
     "loopback-application",
     "loopback"

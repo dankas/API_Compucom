@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Printer} from './printer.model';
 
 @model()
 export class Parque extends Entity {
@@ -21,6 +22,13 @@ export class Parque extends Entity {
   })
   endereco: object;
 
+  @property({
+    type: 'number',
+  })
+  clienteId?: number;
+
+  @hasMany(() => Printer)
+  printersnoparque: Printer[];
 
   constructor(data?: Partial<Parque>) {
     super(data);

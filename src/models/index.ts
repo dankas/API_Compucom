@@ -7,3 +7,4 @@ export * from './parque.model';
 export * from './printer-modelo.model';
 export * from './printer.model';
 
+export * from './user.model';

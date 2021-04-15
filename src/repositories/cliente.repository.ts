@@ -1,8 +1,10 @@
-import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
-import {Cliente, ClienteRelations, Parque} from '../models';
+
+import {Getter, inject} from '@loopback/core';
+import {DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
 import {DbDataSource} from '../datasources';
-import {inject, Getter} from '@loopback/core';
+import {Cliente, ClienteRelations, Parque} from '../models';
 import {ParqueRepository} from './parque.repository';
+
 
 export class ClienteRepository extends DefaultCrudRepository<
   Cliente,

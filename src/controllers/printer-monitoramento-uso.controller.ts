@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -19,7 +20,7 @@ import {
   MonitoramentoUso, Printer
 } from '../models';
 import {PrinterRepository} from '../repositories';
-
+@authenticate('jwt')
 export class PrinterMonitoramentoUsoController {
   constructor(
     @repository(PrinterRepository) protected printerRepository: PrinterRepository,
